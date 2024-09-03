@@ -1,9 +1,18 @@
-class AppState {
-  final int counter;
+import '../reducer/bmi_reducer.dart';
+import 'bmi_state.dart';
 
-  AppState({required this.counter});
+class AppState {
+  final BMIState bmiState;
+
+  AppState({required this.bmiState});
 
   factory AppState.initial() {
-    return AppState(counter: 0);
+    return AppState(bmiState: BMIState.initial());
   }
+}
+
+AppState appReducer(AppState state, dynamic action) {
+  return AppState(
+    bmiState: bmiReducer(state.bmiState, action),
+  );
 }

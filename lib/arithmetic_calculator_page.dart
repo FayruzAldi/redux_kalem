@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ArithmeticCalculatorPage extends StatelessWidget {
+  const ArithmeticCalculatorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kalkulator Aritmatik'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('This is the Arithmetic Calculator Page'),
       ),
     );
