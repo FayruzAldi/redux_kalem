@@ -1,9 +1,8 @@
 import 'package:calculatorapp_redux/screen/aritmatik_screen.dart';
-import 'package:calculatorapp_redux/screen/bangundatar_screen.dart';
 import 'package:calculatorapp_redux/screen/bmi_screen.dart';
+import 'package:calculatorapp_redux/screen/geometry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
-
 
 class HomePage extends StatelessWidget {
   @override
@@ -18,7 +17,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BmiScreen()),
+                MaterialPageRoute(builder: (context) => BMIScreen()),
               );
             },
             child: Text('BMI Calculator'),
