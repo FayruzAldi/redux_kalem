@@ -1,6 +1,6 @@
+import 'package:calculatorapp_redux/screen/bangundatar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp_redux/screen/aritmatik_screen.dart';
-import 'package:calculatorapp_redux/screen/bangundatar_screen.dart';
 import 'package:calculatorapp_redux/screen/bmi_screen.dart';
 
 class HomePage extends StatelessWidget {
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BmiScreen()),
+                  MaterialPageRoute(builder: (context) => BMIScreen()),
                 );
               },
             ),
