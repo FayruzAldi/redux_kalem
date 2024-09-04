@@ -2,6 +2,7 @@ import 'package:redux/redux.dart';
 import 'actions.dart';
 import 'appState.dart';
 
+
 double calculateBMI(double height, double weight) {
   return weight / (height * height);
 }
