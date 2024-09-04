@@ -6,11 +6,13 @@ import 'package:redux/redux.dart';
 
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Redux Application Project'),
+        title: const Text('Redux Application Project'),
       ),
       body: Column(
         children: [
@@ -18,28 +20,28 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BmiScreen()),
+                MaterialPageRoute(builder: (context) => const BmiScreen()),
               );
             },
-            child: Text('BMI Calculator'),
+            child: const Text('BMI Calculator'),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AritmatikScreen()),
+                MaterialPageRoute(builder: (context) => const AritmatikScreen()),
               );
             },
-            child: Text('Arithmetic Calculator'),
+            child: const Text('Arithmetic Calculator'),
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BangundatarScreen()),
+                MaterialPageRoute(builder: (context) => const BangundatarScreen()),
               );
             },
-            child: Text('Shape Calculator'),
+            child: const Text('Shape Calculator'),
           ),
         ],
       ),
