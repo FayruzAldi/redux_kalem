@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.calculatorapp_redux"
-    compileSdk = 33  // Ganti dengan nilai yang sesuai
+    compileSdk = 34  // Ganti dengan nilai yang sesuai
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -23,7 +23,7 @@ android {
         applicationId = "com.example.calculatorapp_redux"
         // Update the following values to match your application needs.
         minSdk = 21  // Ganti dengan nilai yang sesuai
-        targetSdk = 33  // Ganti dengan nilai yang sesuai
+        targetSdk = 34  // Ganti dengan nilai yang sesuai
         versionCode = 1
         versionName = "1.0"
     }
