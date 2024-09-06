@@ -1,37 +1,23 @@
+import 'package:calculatorapp_redux/redux/appState.dart';
+import 'package:calculatorapp_redux/redux/store.dart';
+import 'package:calculatorapp_redux/screen/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_redux_navigation/flutter_redux_navigation.dart';
-import 'package:homepage/arithmetic_calculator_page.dart';
-import 'package:redux/redux.dart';
-import 'package:homepage/state/app_state.dart';
-import 'homepage.dart';
-import 'bmi_calculator_page.dart';
-import 'geometry_calculator_page.dart';
 
 void main() {
-  final store = Store<AppState>(
-    appReducer,
-    initialState: AppState.initial(),
-    middleware: [const NavigationMiddleware<AppState>().call],
-  );
-
-  runApp(MyApp(store: store));
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  final Store<AppState> store;
-
-  const MyApp({super.key, required this.store});
-
+class MyApp extends StatelessWidget { 
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Redux Calculator App',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+          primarySwatch: Colors.blue,
         ),
         navigatorKey: NavigatorHolder.navigatorKey,
         routes: {
