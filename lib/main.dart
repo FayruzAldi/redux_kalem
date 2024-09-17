@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Redux Calculator App',
-        theme: ThemeData(
+        theme: ThemeData( 
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,

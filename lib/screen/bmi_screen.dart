@@ -1,8 +1,8 @@
+import 'package:calculatorapp_redux/component/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:calculatorapp_redux/redux/actions.dart';
 import 'package:calculatorapp_redux/redux/appState.dart';
-import 'package:flutter/services.dart';
 
 class BMIScreen extends StatelessWidget {
   final TextEditingController heightController = TextEditingController();
@@ -41,13 +41,13 @@ class BMIScreen extends StatelessWidget {
                   color: Colors.blueGrey,
                 ),
                 SizedBox(height: 20),
-                _buildCustomTextField(
+                buildCustomTextField(
                   controller: heightController,
                   labelText: 'Height (cm)',
                   inputType: TextInputType.number,
                 ),
                 SizedBox(height: 10),
-                _buildCustomTextField(
+                buildCustomTextField(
                   controller: weightController,
                   labelText: 'Weight (kg)',
                   inputType: TextInputType.number,
@@ -58,7 +58,7 @@ class BMIScreen extends StatelessWidget {
                     return (height, weight) => store.dispatch(CalculateBMI(height, weight));
                   },
                   builder: (context, callback) {
-                    return ElevatedButton(
+                    return buildElevatedButton(
                       onPressed: () {
                         final heightCm = double.tryParse(heightController.text);
                         final weight = double.tryParse(weightController.text);
@@ -73,7 +73,7 @@ class BMIScreen extends StatelessWidget {
                           );
                         }
                       },
-                      child: Text('Calculate BMI'),
+                      label: 'Calculate BMI',
                     );
                   },
                 ),
@@ -81,39 +81,6 @@ class BMIScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCustomTextField({
-    required TextEditingController controller,
-    required String labelText,
-    TextInputType inputType = TextInputType.text,
-  }) {
-    return TextField(
-      controller: controller,
-      keyboardType: inputType,
-      inputFormatters: inputType == TextInputType.number
-          ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))]
-          : [],
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(color: Colors.blueGrey),
-        filled: true,
-        fillColor: Colors.grey[200],
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.blue),
-        ),
-        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       ),
     );
   }

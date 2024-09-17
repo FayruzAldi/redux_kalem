@@ -1,15 +1,15 @@
+import 'package:calculatorapp_redux/component/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:calculatorapp_redux/redux/actions.dart';
 import 'package:calculatorapp_redux/redux/appState.dart';
-import 'package:flutter/services.dart';
 
 class Aritmatikscreen extends StatefulWidget {
   @override
-  _AritmatikscreenState createState() => _AritmatikscreenState();
+  _AritmatikScreenState createState() => _AritmatikScreenState();
 }
 
-class _AritmatikscreenState extends State<Aritmatikscreen> {
+class _AritmatikScreenState extends State<Aritmatikscreen> {
   final TextEditingController num1Controller = TextEditingController();
   final TextEditingController num2Controller = TextEditingController();
   String? selectedOperation;
@@ -29,13 +29,13 @@ class _AritmatikscreenState extends State<Aritmatikscreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildCustomTextField(
+                buildCustomTextField(
                   controller: num1Controller,
                   labelText: 'Number 1',
                   inputType: TextInputType.number,
                 ),
                 SizedBox(height: 10),
-                _buildCustomTextField(
+                buildCustomTextField(
                   controller: num2Controller,
                   labelText: 'Number 2',
                   inputType: TextInputType.number,
@@ -49,56 +49,19 @@ class _AritmatikscreenState extends State<Aritmatikscreen> {
                         store.dispatch(CalculateArithmetic(num1, num2, operation));
                   },
                   builder: (context, callback) {
-                    return ElevatedButton(
+                    return buildElevatedButton(
                       onPressed: () {
                         final num1 = double.tryParse(num1Controller.text);
                         final num2 = double.tryParse(num2Controller.text);
 
                         if (num1 != null && num2 != null && selectedOperation != null) {
                           callback(num1, num2, selectedOperation!);
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return StoreConnector<AppState, String>(
-                                converter: (store) => store.state.arithmeticResult.toString(),
-                                builder: (context, result) {
-                                  return AlertDialog(
-                                    title: Text('Hasilnya'),
-                                    content: Text('$result'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                          );
+                          _showResultDialog(context);
                         } else {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Invalid Input'),
-                                content: Text('tolong isi yang kosong.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          _showErrorDialog(context);
                         }
                       },
-                      child: Text('Calculate'),
+                      label: 'Calculate',
                     );
                   },
                 ),
@@ -106,39 +69,6 @@ class _AritmatikscreenState extends State<Aritmatikscreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCustomTextField({
-    required TextEditingController controller,
-    required String labelText,
-    TextInputType inputType = TextInputType.text,
-  }) {
-    return TextField(
-      controller: controller,
-      keyboardType: inputType,
-      inputFormatters: inputType == TextInputType.number
-          ? [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))]
-          : [],
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(color: Colors.blueGrey),
-        filled: true,
-        fillColor: Colors.grey[200],
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.blue),
-        ),
-        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       ),
     );
   }
@@ -169,6 +99,51 @@ class _AritmatikscreenState extends State<Aritmatikscreen> {
         ),
         Text(operation),
       ],
+    );
+  }
+
+  void _showResultDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StoreConnector<AppState, String>(
+          converter: (store) => store.state.arithmeticResult.toString(),
+          builder: (context, result) {
+            return AlertDialog(
+              title: Text('Result'),
+              content: Text(result),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Invalid Input'),
+          content: Text('Please fill in all fields.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
